@@ -103,7 +103,10 @@ DataFrame.prototype.parseResults = function(results, level) {
     if (numSubDimensions) {
       var subLevel = (self.compact && numSubDimensions == 1) ? level : level + 1;
       var subRows = self.parseResults(dimension.subDimensions, subLevel)
-      subRows.forEach(function(subRow) {rows.push(subRow)})
+      subRows.forEach(function(subRow) {
+		  subRow.includeInExport = (self.compact && numSubDimensions == 1);
+		  rows.push(subRow)
+	  })
     }
   })
 
